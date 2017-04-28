@@ -1,141 +1,176 @@
 ﻿using System;
-using System.Collections.Generic;
-using Infinity.Things;
 using System.Linq;
+using Infinity.Extensions;
+using Infinity.Interfaces;
+using Infinity.Objects;
 
-namespace Infinity {
-    class Program {
-        static Thing position;
+namespace Infinity
+{
+    public static class Program
+    {
+        #region Members
 
-        static void Main(string[] args) {
+        private static IMatter _position;
+
+        #endregion
+
+        #region Methods
+
+        public static void Main(string[] args)
+        {
             Initialize();
+
+            while (ListenForUserInput())
+            {
+                // Weird...?
+            }
+
+            Console.Write("\nPress any key to exit");
+            Console.ReadLine();
         }
 
-        static void Initialize() {
+        private static void Initialize()
+        {
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.BufferHeight = 60;
+            Console.BufferWidth = 160;
+            Console.WindowHeight = 60;
+            Console.WindowWidth = 160;
 
-            Thing.random = new Random();
+            _position = new Multiverse();
+            _position.Initialize();
 
-            List<Thing> things = new List<Thing>();
+            if (_position.Parent != null)
+            {
+                $"# & & & <y> Up <g> {_position.Parent.Type} <w> {_position.Parent.Name} </>".WriteFormatted();
+            }
 
-            things.Add(new Multiverse());
+            $"# & & & <g> {_position.Type} <w> {_position.Name} </> #".WriteFormatted();
 
-            position = things[0];
-            position.Interact();
+            var position = 0;
 
-            while (Loop()) { }
+            if (_position.Children.Any())
+            {
+                _position.Children.ToList().ForEach(child =>
+                {
+                    $"& & & <y> Down <c> {position} </> - <g> {child.Type} <w> {child.Name} </>".WriteFormatted();
+                    position++;
+                });
+            }
+            else
+            {
+                "& & & <r> No lower levels... </>".WriteFormatted();
+            }
         }
 
-        static bool Loop() {
-            Display("# & Enter your command: ");
+        private static bool ListenForUserInput()
+        {
+            "# & Enter your command: ".WriteFormatted();
 
             Console.ForegroundColor = ConsoleColor.Magenta;
-            string[] command = Console.ReadLine().ToLower().Split(' ');
+            var input = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return true;
+            }
+
+            var command = input.ToLower().Split(' ');
             Console.ForegroundColor = ConsoleColor.DarkGray;
 
-            if (command[0] == "exit" || command[0] == "")
-                return false;
-            else if (command[0] == "help") {
-                position.Print();
-            } else if (command[0] == "down") {
-                if (position.children.Count != 0) {
-                    int newPosition;
+            switch (command[0].ToLowerInvariant())
+            {
+                case "exit":
+                    return false;
 
-                    try {
-                        newPosition = int.Parse(command[1]);
-                    } catch (Exception) {
-                        if (position.children.Count() == 1)
-                            Display(string.Format("# & To move down, enter <m> down <c> 0 </> ..."));
-                        else
-                            Display(string.Format("# & To move down, enter <m> down </> and a valid number between <c> 0 </> and <c> {0} </> ...", (position.children.Count - 1)));
-                        return true;
-                    }
+                case "help":
+                    PrintMatter(_position);
+                    return true;
 
-                    if (newPosition < position.children.Count) {
-                        position = position.children[newPosition];
-                        Display(string.Format("# & Moved to <w> {0} </> !", position.name));
-                        position.Interact();
-                    } else {
-                        if (position.children.Count() == 1)
-                            Display(string.Format("# & To move down, enter <m> down <c> 0 </> ..."));
-                        else
-                            Display(string.Format("# & To move down, enter <m> down </> and a valid number between <c> 0 </> and <c> {0} </> ...", (position.children.Count - 1)));
-                        return true;
-                    }
-                } else
-                    Display("# & There are no places to which you can move down...");
-            } else if (command[0] == "up") {
-                if (position.parent != null) {
-                    position = position.parent;
-                    Display(string.Format("# & Moved to <w> {0} </> !", position.name));
-                    position.Interact();
-                } else
-                    Display("# & There is no place to which you can move up...");
-            } else {
-                Display(string.Format("# & <m> {0} </> is not a proper command...", command));
+                case "down":
+                    return MoveDown(command);
+
+                case "up":
+                    return MoveUp(command);
+
+                default:
+                    $"# & <m> {command[0]} </> is not a proper command...".WriteFormatted();
+                    return true;
+            }
+        }
+
+        private static bool MoveUp(string[] command)
+        {
+            if (_position.Parent != null)
+            {
+                _position = _position.Parent;
+                $"# & Moved to <w> {_position.Name} </> !".WriteFormatted();
+                _position.Initialize();
+            }
+            else
+            {
+                "# & There is no place to which you can move up...".WriteFormatted();
             }
 
             return true;
         }
 
-        /// <summary>
-        /// Writes the specified string value to the standard output stream using custom formatting.
-        /// </summary>
-        /// <param name="text">The value to write.</param>
-        public static void Display(string text) {
-            string[] segments = text.Split(' ');
+        private static bool MoveDown(string[] command)
+        {
+            if (_position.Children.Any())
+            {
+                int newPosition;
 
-            for (int x = 0; x < segments.Count(); x++) {
-                int end = segments[x].Count() - 1;
-                if (end == -1)
-                    continue;
-
-                if (segments[x] == "#") {
-                    Console.Write("\n");
-                    continue;
-                } else if (segments[x] == "&") {
-                    Console.Write(" ");
-                    continue;
+                try
+                {
+                    newPosition = int.Parse(command[1]);
+                }
+                catch
+                {
+                    (
+                        _position.Children.Count == 1 ?
+                        "# & To move down, enter <m> down <c> 0 </> ..." :
+                        $"# & To move down, enter <m> down </> and a valid number between <c> 0 </> and <c> {(_position.Children.Count - 1)} </> ..."
+                    ).WriteFormatted();
+                    return true;
                 }
 
-                if (segments[x] == "<r>") {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    continue;
-                } else if (segments[x] == "<y>") {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    continue;
-                } else if (segments[x] == "<g>") {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    continue;
-                } else if (segments[x] == "<c>") {
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    continue;
-                } else if (segments[x] == "<b>") {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    continue;
-                } else if (segments[x] == "<m>") {
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    continue;
-                } else if (segments[x] == "<w>") {
-                    Console.ForegroundColor = ConsoleColor.White;
-                    continue;
-                } else if (segments[x] == "</>") {
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                    continue;
+                if (newPosition < _position.Children.Count)
+                {
+                    _position = _position.Children[newPosition];
+                    $"# & Moved to <w> {_position.Name} </> !".WriteFormatted();
+                    _position.Initialize();
                 }
-
-                Console.Write(segments[x]);
-
-                if ((segments[segments.Count() - 2] == "</>" && x == segments.Count() - 3) && segments[segments.Count() - 1] != "")
-                    continue;
-
-                Console.Write(" ");
+                else
+                {
+                    if (_position.Children.Count == 1)
+                    {
+                        "# & To move down, enter <m> down <c> 0 </> ...".WriteFormatted();
+                    }
+                    else
+                    {
+                        $"# & To move down, enter <m> down </> and a valid number between <c> 0 </> and <c> {(_position.Children.Count - 1)} </> ...".WriteFormatted();
+                    }
+                }
+            }
+            else
+            {
+                "# & There are no places to which you can move down...".WriteFormatted();
             }
 
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-
-            if (segments[segments.Count() - 1] != "")
-                Console.Write("\n");
+            return true;
         }
+
+        private static void PrintMatter(IMatter matter)
+        {
+            $"# & & & <g> {matter.Type} <w> {matter.Name} </> #".WriteFormatted();
+
+            foreach (var property in matter.Properties)
+            {
+                $"& & & <m> {property.Key} </> - <c> {property.Value} </>".WriteFormatted();
+            }
+        }
+
+        #endregion
     }
 }
