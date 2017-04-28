@@ -43,16 +43,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IMatter.cs" />
+    <Compile Include="Objects\AsteroidBelt.cs" />
+    <Compile Include="Objects\DarkEnergy.cs" />
+    <Compile Include="Objects\GalacticSupercluster.cs" />
+    <Compile Include="Objects\Galaxy.cs" />
+    <Compile Include="Objects\GalaxyFilament.cs" />
+    <Compile Include="Objects\Moon.cs" />
+    <Compile Include="Objects\Multiverse.cs" />
+    <Compile Include="Objects\Planet.cs" />
+    <Compile Include="Objects\SpaceStation.cs" />
+    <Compile Include="Objects\Star.cs" />
+    <Compile Include="Objects\StarSystem.cs" />
+    <Compile Include="Objects\SuperVoid.cs" />
+    <Compile Include="Objects\Universe.cs" />
+    <Compile Include="Objects\Void.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Thing.cs" />
-    <Compile Include="Children.cs" />
-    <Compile Include="Things\Lifeforms.cs" />
-    <Compile Include="Things\Space Things.cs" />
+    <Compile Include="Fundamentals\Matter.cs" />
+    <Compile Include="Lifeforms\Human.cs" />
+    <Compile Include="Objects\Asteroid.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
