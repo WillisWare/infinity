@@ -8,8 +8,6 @@ namespace Infinity.Interfaces
 
         void Initialize();
 
-        void MakeChildren(IMatter child);
-
         #endregion
 
         #region Properties
@@ -23,8 +21,6 @@ namespace Infinity.Interfaces
         IMatter Parent { get; set; }
 
         IDictionary<string, string> Properties { get; set; }
-
-        string SubType { get; set; }
 
         string Type { get; set; }
 

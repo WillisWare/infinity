@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Infinity.Attributes;
 using Infinity.Interfaces;
 
 namespace Infinity.Fundamentals
@@ -11,110 +12,83 @@ namespace Infinity.Fundamentals
 
         public static Random Random => new Random();
 
-        private IDictionary<string, string> _properties;
-
-        private IList<IMatter> _children;
-
         #endregion
 
         #region Constructors
 
         protected Matter()
         {
-            // Initialize empty instance.
+            // TODO: Generate name.
+            Name = "Fred";
+            Type = GetType().Name;
         }
 
-        protected Matter(string name, string type, string subType)
+        protected Matter(string name)
+            : this(name, null)
         {
-            ChildConfigs = new List<ChildConfig>();
-            Children = new List<Matter>();
-            Properties = new Dictionary<string, string>();
+        }
 
+        protected Matter(string name, IMatter parent)
+        {
             Name = name;
-            SubType = subType;
-            Type = type;
+            Parent = parent;
         }
 
         #endregion
 
         #region Methods
 
+        protected Type[] GetAllowedChildren()
+        {
+            var attribute = Attribute.GetCustomAttribute(GetType(), typeof(AllowedChildAttribute)) as AllowedChildAttribute;
+            if (attribute != null)
+            {
+                return attribute.AllowedTypes;
+            }
+            return new Type[] { };
+        }
+
+        protected int GetMaxChildren()
+        {
+            var attribute = Attribute.GetCustomAttribute(GetType(), typeof(MaxChildrenAttribute)) as MaxChildrenAttribute;
+            if (attribute != null)
+            {
+                return attribute.Value;
+            }
+            return new Random().Next(0, 10);
+        }
+
         public void Initialize()
         {
-            if (!IsInitialized)
-            {
-                var firstChild = ChildConfigs.FirstOrDefault(x => x.Name == SubType);
-                if (firstChild != null)
-                {
-                    foreach (var child in firstChild.Children)
-                    {
-                        MakeChildren(child);
-                    }
-                }
+            LoadChildren();
 
-                IsInitialized = true;
-            }
+            IsInitialized = true;
         }
 
-        public void MakeChildren(IMatter child)
+        protected void LoadChildren()
         {
-            if (child.Min == 1 && child.Max == 1)
+            var childTypes = GetAllowedChildren();
+            if (!childTypes.Any())
             {
-                var childType = Choose(child.Classes);
-                if (childType != null)
-                {
-                    var newChild = Activator.CreateInstance(System.Type.GetType(childType)) as IMatter;
-                    newChild.Parent = this;
-
-                    Children.Add(newChild);
-                }
-            }
-            else
-            {
-                var total = Random.Next(child.Min, child.Max);
-
-                if (total != 0)
-                {
-                    for (var x = 0; x <= total; x++)
-                    {
-                        var childType = Choose(child.Classes);
-                        if (childType != null)
-                        {
-                            var newChild = Activator.CreateInstance(System.Type.GetType(Choose(child.Classes))) as IMatter;
-                            newChild.Parent = this;
-
-                            Children.Add(newChild);
-                        }
-                    }
-                }
-            }
-        }
-
-        protected T Choose<T>(Dictionary<T, double> choices)
-        {
-            var newChoices = new List<T>();
-
-            foreach (var choice in choices)
-            {
-                // TODO: Figure out why this "magic number" of 10 exists?
-                for (var x = 0; x < choice.Value * 10; x++)
-                {
-                    newChoices.Add(choice.Key);
-                }
+                // This object cannot have children.
+                return;
             }
 
-            return newChoices[Random.Next(0, newChoices.Count - 1)];
+            var numChildren = new Random().Next(0, GetMaxChildren());
+            for (var count = 0; count < numChildren; count++)
+            {
+                var child = Activator.CreateInstance(childTypes[0]) as IMatter;
+                child.Parent = this;
+
+                Children.Add(child);
+            }
         }
 
         #endregion
 
         #region Properties
 
-        public IList<IMatter> Children
-        {
-            get { return _children; }
-            set { _children = value; }
-        }
+        public IList<IMatter> Children { get; set; } = new List<IMatter>();
 
         public bool IsInitialized { get; set; }
 
@@ -122,13 +96,7 @@ namespace Infinity.Fundamentals
 
         public IMatter Parent { get; set; }
 
-        public IDictionary<string, string> Properties
-        {
-            get { return _properties; }
-            set { _properties = value; }
-        }
-
-        public string SubType { get; set; }
+        public IDictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
 
         public string Type { get; set; }
 
