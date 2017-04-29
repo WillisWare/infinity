@@ -54,6 +54,7 @@
     <Compile Include="Extensions\ConsoleExtensions.cs" />
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Fundamentals\Life.cs" />
+    <Compile Include="Generators\RandomWordGenerator.cs" />
     <Compile Include="Interfaces\ILife.cs" />
     <Compile Include="Interfaces\IMatter.cs" />
     <Compile Include="Objects\AsteroidBelt.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Fundamentals\Matter.cs" />
     <Compile Include="Lifeforms\Human.cs" />
     <Compile Include="Objects\Asteroid.cs" />
+    <Compile Include="RandomNumber.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

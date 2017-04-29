@@ -2,24 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using Infinity.Attributes;
+using Infinity.Generators;
 using Infinity.Interfaces;
 
 namespace Infinity.Fundamentals
 {
     public abstract class Matter : IMatter
     {
-        #region Members
-
-        public static Random Random => new Random();
-
-        #endregion
-
         #region Constructors
 
         protected Matter()
         {
-            // TODO: Generate name.
-            Name = "Fred";
+            Name = RandomWordGenerator.Word();
             Type = GetType().Name;
         }
 
@@ -55,12 +49,15 @@ namespace Infinity.Fundamentals
             {
                 return attribute.Value;
             }
-            return new Random().Next(0, 10);
+            return RandomNumber.Instance.Next(0, 10);
         }
 
         public void Initialize()
         {
-            LoadChildren();
+            if (!IsInitialized)
+            {
+                LoadChildren();
+            }
 
             IsInitialized = true;
         }
@@ -74,10 +71,12 @@ namespace Infinity.Fundamentals
                 return;
             }
 
-            var numChildren = new Random().Next(0, GetMaxChildren());
+            var numChildren = RandomNumber.Instance.Next(0, GetMaxChildren());
             for (var count = 0; count < numChildren; count++)
             {
-                var child = Activator.CreateInstance(childTypes[0]) as IMatter;
+                var randomTypeIndex = RandomNumber.Instance.Next(0, childTypes.Length);
+
+                var child = Activator.CreateInstance(childTypes[randomTypeIndex]) as IMatter;
                 child.Parent = this;
 
                 Children.Add(child);

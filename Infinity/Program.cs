@@ -10,7 +10,7 @@ namespace Infinity
     {
         #region Members
 
-        private static IMatter _position;
+        private static IMatter _currentMatter;
 
         #endregion
 
@@ -38,30 +38,10 @@ namespace Infinity
             Console.WindowHeight = 60;
             Console.WindowWidth = 160;
 
-            _position = new Multiverse();
-            _position.Initialize();
+            _currentMatter = new Multiverse();
+            _currentMatter.Initialize();
 
-            if (_position.Parent != null)
-            {
-                $"# & & & <y> Up <g> {_position.Parent.Type} <w> {_position.Parent.Name} </>".WriteFormatted();
-            }
-
-            $"# & & & <g> {_position.Type} <w> {_position.Name} </> #".WriteFormatted();
-
-            var position = 0;
-
-            if (_position.Children.Any())
-            {
-                _position.Children.ToList().ForEach(child =>
-                {
-                    $"& & & <y> Down <c> {position} </> - <g> {child.Type} <w> {child.Name} </>".WriteFormatted();
-                    position++;
-                });
-            }
-            else
-            {
-                "& & & <r> No lower levels... </>".WriteFormatted();
-            }
+            PrintMatter(_currentMatter);
         }
 
         private static bool ListenForUserInput()
@@ -84,7 +64,7 @@ namespace Infinity
                     return false;
 
                 case "help":
-                    PrintMatter(_position);
+                    PrintMatter(_currentMatter);
                     return true;
 
                 case "down":
@@ -101,11 +81,11 @@ namespace Infinity
 
         private static bool MoveUp(string[] command)
         {
-            if (_position.Parent != null)
+            if (_currentMatter.Parent != null)
             {
-                _position = _position.Parent;
-                $"# & Moved to <w> {_position.Name} </> !".WriteFormatted();
-                _position.Initialize();
+                _currentMatter = _currentMatter.Parent;
+                $"# & Moved to <w> {_currentMatter.Name} </> !".WriteFormatted();
+                _currentMatter.Initialize();
             }
             else
             {
@@ -117,7 +97,7 @@ namespace Infinity
 
         private static bool MoveDown(string[] command)
         {
-            if (_position.Children.Any())
+            if (_currentMatter.Children.Any())
             {
                 int newPosition;
 
@@ -128,28 +108,28 @@ namespace Infinity
                 catch
                 {
                     (
-                        _position.Children.Count == 1 ?
+                        _currentMatter.Children.Count == 1 ?
                         "# & To move down, enter <m> down <c> 0 </> ..." :
-                        $"# & To move down, enter <m> down </> and a valid number between <c> 0 </> and <c> {(_position.Children.Count - 1)} </> ..."
+                        $"# & To move down, enter <m> down </> and a valid number between <c> 0 </> and <c> {(_currentMatter.Children.Count - 1)} </> ..."
                     ).WriteFormatted();
                     return true;
                 }
 
-                if (newPosition < _position.Children.Count)
+                if (newPosition < _currentMatter.Children.Count)
                 {
-                    _position = _position.Children[newPosition];
-                    $"# & Moved to <w> {_position.Name} </> !".WriteFormatted();
-                    _position.Initialize();
+                    _currentMatter = _currentMatter.Children[newPosition];
+                    $"# & Moved to <w> {_currentMatter.Name} </> !".WriteFormatted();
+                    _currentMatter.Initialize();
                 }
                 else
                 {
-                    if (_position.Children.Count == 1)
+                    if (_currentMatter.Children.Count == 1)
                     {
                         "# & To move down, enter <m> down <c> 0 </> ...".WriteFormatted();
                     }
                     else
                     {
-                        $"# & To move down, enter <m> down </> and a valid number between <c> 0 </> and <c> {(_position.Children.Count - 1)} </> ...".WriteFormatted();
+                        $"# & To move down, enter <m> down </> and a valid number between <c> 0 </> and <c> {(_currentMatter.Children.Count - 1)} </> ...".WriteFormatted();
                     }
                 }
             }
@@ -163,11 +143,30 @@ namespace Infinity
 
         private static void PrintMatter(IMatter matter)
         {
+            if (matter.Parent != null)
+            {
+                $"# & & & <y> Parent: <g> {_currentMatter.Parent.Type} <w> {_currentMatter.Parent.Name} </>".WriteFormatted();
+            }
+
             $"# & & & <g> {matter.Type} <w> {matter.Name} </> #".WriteFormatted();
 
             foreach (var property in matter.Properties)
             {
                 $"& & & <m> {property.Key} </> - <c> {property.Value} </>".WriteFormatted();
+            }
+
+            var position = 0;
+            if (matter.Children.Any())
+            {
+                matter.Children.ToList().ForEach(child =>
+                {
+                    $"& & & <y> Down <c> {position} </> - <g> {child.Type} <w> {child.Name} </>".WriteFormatted();
+                    position++;
+                });
+            }
+            else
+            {
+                "& & & <r> No lower levels... </>".WriteFormatted();
             }
         }
 
