@@ -4,18 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8E5EEE02-40C1-442A-BF51-939D19BA17A4}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{73ECE87D-D0A3-49CC-81A5-E62441B8408B}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Infinity</RootNamespace>
-    <AssemblyName>Infinity</AssemblyName>
+    <RootNamespace>Infinity.Classes</RootNamespace>
+    <AssemblyName>Infinity.Classes</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,22 +48,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\ConsoleExtensions.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Attributes\AllowedChildAttribute.cs" />
+    <Compile Include="Attributes\MaxChildrenAttribute.cs" />
+    <Compile Include="Enums\Disposition.cs" />
+    <Compile Include="Enums\Gender.cs" />
+    <Compile Include="Enums\LifeStage.cs" />
+    <Compile Include="Fundamentals\Life.cs" />
+    <Compile Include="Fundamentals\Matter.cs" />
+    <Compile Include="Generators\RandomWordGenerator.cs" />
+    <Compile Include="Interfaces\ILife.cs" />
+    <Compile Include="Interfaces\IMatter.cs" />
+    <Compile Include="Lifeforms\Human.cs" />
+    <Compile Include="Objects\Asteroid.cs" />
+    <Compile Include="Objects\AsteroidBelt.cs" />
+    <Compile Include="Objects\DarkEnergy.cs" />
+    <Compile Include="Objects\GalacticSupercluster.cs" />
+    <Compile Include="Objects\Galaxy.cs" />
+    <Compile Include="Objects\GalaxyFilament.cs" />
+    <Compile Include="Objects\Moon.cs" />
+    <Compile Include="Objects\Multiverse.cs" />
+    <Compile Include="Objects\Planet.cs" />
+    <Compile Include="Objects\SpaceStation.cs" />
+    <Compile Include="Objects\Star.cs" />
+    <Compile Include="Objects\StarSystem.cs" />
+    <Compile Include="Objects\SuperVoid.cs" />
+    <Compile Include="Objects\Universe.cs" />
+    <Compile Include="Objects\Void.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomNumber.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <Content Include="infinity.ico" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="infinity.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Infinity.Classes\Infinity.Classes.csproj">
-      <Project>{73ece87d-d0a3-49cc-81a5-e62441b8408b}</Project>
-      <Name>Infinity.Classes</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

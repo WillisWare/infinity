@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 		infinity.jpg = infinity.jpg
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infinity.Classes", "Infinity.Classes\Infinity.Classes.csproj", "{73ECE87D-D0A3-49CC-81A5-E62441B8408B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8E5EEE02-40C1-442A-BF51-939D19BA17A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E5EEE02-40C1-442A-BF51-939D19BA17A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E5EEE02-40C1-442A-BF51-939D19BA17A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73ECE87D-D0A3-49CC-81A5-E62441B8408B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73ECE87D-D0A3-49CC-81A5-E62441B8408B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73ECE87D-D0A3-49CC-81A5-E62441B8408B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73ECE87D-D0A3-49CC-81A5-E62441B8408B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

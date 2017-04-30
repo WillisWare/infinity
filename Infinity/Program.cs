@@ -1,14 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
+using Infinity.Classes.Interfaces;
+using Infinity.Classes.Objects;
 using Infinity.Extensions;
-using Infinity.Interfaces;
-using Infinity.Objects;
+using Newtonsoft.Json;
 
 namespace Infinity
 {
+    /// <summary>
+    /// Main entry point for the application.
+    /// </summary>
     public static class Program
     {
         #region Members
+
+        private const string SAVES_DIR = ".\\saves\\";
 
         private static IMatter _currentMatter;
 
@@ -16,6 +25,10 @@ namespace Infinity
 
         #region Methods
 
+        /// <summary>
+        /// Startup method for execution.
+        /// </summary>
+        /// <param name="args">An <see cref="Array"/> of <see cref="string"/> containing the sartup arguments for execution.</param>
         public static void Main(string[] args)
         {
             Initialize();
@@ -25,10 +38,29 @@ namespace Infinity
                 // Weird...?
             }
 
-            Console.Write("\nPress any key to exit");
+            Console.Write("\nSave current multiverse (y/n)? ");
+            var input = Console.ReadLine();
+            if (input.StartsWith("y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                SaveMultiverse();
+            }
+
+            $"# & <g> Press any key to exit </>".WriteFormatted();
             Console.ReadLine();
         }
 
+        private static string GetSavesDirectory()
+        {
+            if (!Directory.Exists(SAVES_DIR))
+            {
+                Directory.CreateDirectory(SAVES_DIR);
+            }
+            return SAVES_DIR;
+        }
+
+        /// <summary>
+        /// Configures the console and prepares the application for interaction with a top-level Multiverse instance.
+        /// </summary>
         private static void Initialize()
         {
             Console.BackgroundColor = ConsoleColor.Black;
@@ -38,12 +70,30 @@ namespace Infinity
             Console.WindowHeight = 60;
             Console.WindowWidth = 160;
 
-            _currentMatter = new Multiverse();
-            _currentMatter.Initialize();
+            var files = Directory.EnumerateFiles(GetSavesDirectory());
+            if (files.Any())
+            {
+                Console.Write("\nWould you like to open the last saved multiverse (y/n)? ");
+                var input = Console.ReadLine();
+                if (input.StartsWith("y", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    LoadLastSave(files);
+                }
+            }
+
+            if (_currentMatter == null)
+            {
+                _currentMatter = new Multiverse();
+                _currentMatter.Initialize();
+            }
 
             PrintMatter(_currentMatter);
         }
 
+        /// <summary>
+        /// Lists UI menu options and accepts input via keyboard.
+        /// </summary>
+        /// <returns>A <see cref="bool"/> value indicating whether or not the user has opted to continue execution.</returns>
         private static bool ListenForUserInput()
         {
             "# & Enter your command: ".WriteFormatted();
@@ -79,6 +129,35 @@ namespace Infinity
             }
         }
 
+        private static void LoadLastSave(IEnumerable<string> files)
+        {
+            var lastSave = files.OrderByDescending(s => s).First();
+            try
+            {
+                using (var file = File.OpenRead(lastSave))
+                {
+                    using (var reader = new StreamReader(file))
+                    {
+                        var serializationSettings = new JsonSerializerSettings
+                        {
+                            TypeNameHandling = TypeNameHandling.Auto
+                        };
+                        _currentMatter = JsonConvert.DeserializeObject<Multiverse>(reader.ReadToEnd(), serializationSettings);
+                    }
+                    file.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                $"# & Could not load {lastSave}: <r> {ex.Message} </>".WriteFormatted();
+            }
+        }
+
+        /// <summary>
+        /// Selects the parent <see cref="IMatter"/> instance, if one exists, and lists its properties in the console.
+        /// </summary>
+        /// <param name="command">An <see cref="Array"/> of <see cref="string"/> containing the user-specified options for the command.</param>
+        /// <returns>A <see cref="bool"/> value indicating whether or not execution should continue.</returns>
         private static bool MoveUp(string[] command)
         {
             if (_currentMatter.Parent != null)
@@ -95,6 +174,11 @@ namespace Infinity
             return true;
         }
 
+        /// <summary>
+        /// Selects the specified child <see cref="IMatter"/> instance, if one exists, and lists its properties in the console.
+        /// </summary>
+        /// <param name="command">An <see cref="Array"/> of <see cref="string"/> containing the user-specified options for the command.</param>
+        /// <returns>A <see cref="bool"/> value indicating whether or not execution should continue.</returns>
         private static bool MoveDown(string[] command)
         {
             if (_currentMatter.Children.Any())
@@ -141,6 +225,10 @@ namespace Infinity
             return true;
         }
 
+        /// <summary>
+        /// Prints the properties of the specified <see cref="IMatter"/> instance and its parent, if one exists.
+        /// </summary>
+        /// <param name="matter">An <see cref="IMatter"/> implementation whose properties will be displayed.</param>
         private static void PrintMatter(IMatter matter)
         {
             if (matter.Parent != null)
@@ -167,6 +255,31 @@ namespace Infinity
             else
             {
                 "& & & <r> No lower levels... </>".WriteFormatted();
+            }
+        }
+
+        private static void SaveMultiverse()
+        {
+            while (_currentMatter.Parent != null)
+            {
+                _currentMatter = _currentMatter.Parent;
+            }
+
+            var multiverse = _currentMatter;
+            try
+            {
+                var contents = multiverse.ToString();
+                var fileName = $"{GetSavesDirectory()}{DateTime.Now.ToString("yyyy-MM-dd.HHmmss")}_{multiverse.Name}.json";
+                using (var file = File.OpenWrite(fileName))
+                {
+                    file.Write(Encoding.UTF8.GetBytes(contents), 0, contents.Length);
+                    file.Flush();
+                    file.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                $"# & Could not save file: <r> {ex.Message} </>".WriteFormatted();
             }
         }
 
