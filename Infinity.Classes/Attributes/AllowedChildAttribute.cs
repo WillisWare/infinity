@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Infinity.Classes.Attributes
+namespace WillisWare.Infinity.Classes.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class AllowedChildAttribute : Attribute

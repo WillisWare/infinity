@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Infinity.Classes.Attributes
+namespace WillisWare.Infinity.Classes.Attributes
 {
     public sealed class MaxChildrenAttribute : Attribute
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Infinity.Classes.Interfaces
+namespace WillisWare.Infinity.Classes.Interfaces
 {
     public interface IMatter
     {

@@ -1,7 +1,7 @@
-﻿using Infinity.Classes.Attributes;
-using Infinity.Classes.Fundamentals;
+﻿using WillisWare.Infinity.Classes.Attributes;
+using WillisWare.Infinity.Classes.Fundamentals;
 
-namespace Infinity.Classes.Objects
+namespace WillisWare.Infinity.Classes.Objects
 {
     [MaxChildren(0)]
     public class Asteroid : Matter

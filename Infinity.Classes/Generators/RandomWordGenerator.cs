@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Linq;
 
-namespace Infinity.Classes.Generators
+namespace WillisWare.Infinity.Classes.Generators
 {
     /// <summary>
     /// A simple C# utility class to generate random nonsense words that follow language conventions closely enough to be readable and memorable by humans.

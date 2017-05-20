@@ -1,6 +1,6 @@
-using Infinity.Classes.Fundamentals;
+using WillisWare.Infinity.Classes.Fundamentals;
 
-namespace Infinity.Classes.Objects
+namespace WillisWare.Infinity.Classes.Objects
 {
     public class Moon : Matter
     {

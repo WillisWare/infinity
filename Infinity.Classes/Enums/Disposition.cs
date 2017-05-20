@@ -1,4 +1,4 @@
-﻿namespace Infinity.Classes.Enums
+﻿namespace WillisWare.Infinity.Classes.Enums
 {
     public enum Disposition
     {

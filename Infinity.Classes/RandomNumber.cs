@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Infinity.Classes
+namespace WillisWare.Infinity.Classes
 {
     /// <summary>
     /// Singleton random number generator class.

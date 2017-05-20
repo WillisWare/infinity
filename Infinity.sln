@@ -3,15 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infinity", "Infinity\Infinity.csproj", "{8E5EEE02-40C1-442A-BF51-939D19BA17A4}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{BC26DEED-9719-4A6A-87CF-056EABC41233}"
 	ProjectSection(SolutionItems) = preProject
 		infinity.ico = infinity.ico
 		infinity.jpg = infinity.jpg
+		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infinity.Classes", "Infinity.Classes\Infinity.Classes.csproj", "{73ECE87D-D0A3-49CC-81A5-E62441B8408B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WillisWare.Infinity.Classes", "Infinity.Classes\WillisWare.Infinity.Classes.csproj", "{73ECE87D-D0A3-49CC-81A5-E62441B8408B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WillisWare.Infinity.Maslow", "Infinity.Maslow\WillisWare.Infinity.Maslow.csproj", "{8A5DEB8C-28A3-4281-8F5F-5B27CF24B0B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6806C49B-AF8A-4A34-9225-DCFBB33B1104}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WillisWare.Infinity.Tests", "Infinity.Tests\WillisWare.Infinity.Tests.csproj", "{93994016-DDC3-4E80-882F-02D473302274}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,16 +24,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8E5EEE02-40C1-442A-BF51-939D19BA17A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E5EEE02-40C1-442A-BF51-939D19BA17A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E5EEE02-40C1-442A-BF51-939D19BA17A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E5EEE02-40C1-442A-BF51-939D19BA17A4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{73ECE87D-D0A3-49CC-81A5-E62441B8408B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{73ECE87D-D0A3-49CC-81A5-E62441B8408B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73ECE87D-D0A3-49CC-81A5-E62441B8408B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73ECE87D-D0A3-49CC-81A5-E62441B8408B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A5DEB8C-28A3-4281-8F5F-5B27CF24B0B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A5DEB8C-28A3-4281-8F5F-5B27CF24B0B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A5DEB8C-28A3-4281-8F5F-5B27CF24B0B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A5DEB8C-28A3-4281-8F5F-5B27CF24B0B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93994016-DDC3-4E80-882F-02D473302274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93994016-DDC3-4E80-882F-02D473302274}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93994016-DDC3-4E80-882F-02D473302274}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93994016-DDC3-4E80-882F-02D473302274}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{93994016-DDC3-4E80-882F-02D473302274} = {6806C49B-AF8A-4A34-9225-DCFBB33B1104}
 	EndGlobalSection
 EndGlobal

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Infinity.Classes.Enums
+namespace WillisWare.Infinity.Classes.Enums
 {
     public enum Gender
     {

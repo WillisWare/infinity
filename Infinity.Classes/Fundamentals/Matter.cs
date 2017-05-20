@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Infinity.Classes.Attributes;
-using Infinity.Classes.Generators;
-using Infinity.Classes.Interfaces;
 using Newtonsoft.Json;
+using WillisWare.Infinity.Classes.Attributes;
+using WillisWare.Infinity.Classes.Generators;
+using WillisWare.Infinity.Classes.Interfaces;
 
-namespace Infinity.Classes.Fundamentals
+namespace WillisWare.Infinity.Classes.Fundamentals
 {
     public abstract class Matter : IMatter
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Infinity.Classes.Enums;
+using WillisWare.Infinity.Classes.Enums;
 
-namespace Infinity.Classes.Interfaces
+namespace WillisWare.Infinity.Classes.Interfaces
 {
     public interface ILife
     {

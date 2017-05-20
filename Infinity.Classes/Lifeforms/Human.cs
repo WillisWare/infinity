@@ -1,6 +1,6 @@
-﻿using Infinity.Classes.Fundamentals;
+﻿using WillisWare.Infinity.Classes.Fundamentals;
 
-namespace Infinity.Classes.Lifeforms
+namespace WillisWare.Infinity.Classes.Lifeforms
 {
     public class Human : Life
     {

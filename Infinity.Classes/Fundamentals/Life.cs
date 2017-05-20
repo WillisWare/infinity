@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Infinity.Classes.Enums;
-using Infinity.Classes.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using WillisWare.Infinity.Classes.Enums;
+using WillisWare.Infinity.Classes.Interfaces;
 
-namespace Infinity.Classes.Fundamentals
+namespace WillisWare.Infinity.Classes.Fundamentals
 {
     public abstract class Life : ILife
     {

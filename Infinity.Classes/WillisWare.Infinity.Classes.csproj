@@ -7,7 +7,7 @@
     <ProjectGuid>{73ECE87D-D0A3-49CC-81A5-E62441B8408B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Infinity.Classes</RootNamespace>
+    <RootNamespace>WillisWare.Infinity.Classes</RootNamespace>
     <AssemblyName>Infinity.Classes</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Attributes\AllowedChildAttribute.cs" />
     <Compile Include="Attributes\MaxChildrenAttribute.cs" />
     <Compile Include="Enums\Disposition.cs" />
@@ -82,6 +85,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Infinity.Maslow\WillisWare.Infinity.Maslow.csproj">
+      <Project>{8a5deb8c-28a3-4281-8f5f-5b27cf24b0b8}</Project>
+      <Name>WillisWare.Infinity.Maslow</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
