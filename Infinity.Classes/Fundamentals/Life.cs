@@ -6,7 +6,7 @@ using WillisWare.Infinity.Classes.Interfaces;
 
 namespace WillisWare.Infinity.Classes.Fundamentals
 {
-    public abstract class Life : ILife
+    public class Life : ILife
     {
         #region Methods
 

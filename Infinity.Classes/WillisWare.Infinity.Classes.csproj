@@ -87,6 +87,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Infinity.Events\WillisWare.Infinity.Events.csproj">
+      <Project>{783e247a-9c2b-4856-a052-489842c32dac}</Project>
+      <Name>WillisWare.Infinity.Events</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infinity.Maslow\WillisWare.Infinity.Maslow.csproj">
       <Project>{8a5deb8c-28a3-4281-8f5f-5b27cf24b0b8}</Project>
       <Name>WillisWare.Infinity.Maslow</Name>
