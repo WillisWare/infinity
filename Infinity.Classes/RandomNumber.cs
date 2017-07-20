@@ -34,12 +34,12 @@ namespace WillisWare.Infinity.Classes
         /// <summary>
         /// Gets a new random number.
         /// </summary>
-        /// <param name="min">An <see cref="int"/> value specifying the smallest number that can be generated.</param>
-        /// <param name="max">An <see cref="int"/> value specifying the largest number that can be generated.</param>
-        /// <returns>An <see cref="int"/> value containing the randomly generated number.</returns>
-        public int Next(int min, int max)
+        /// <param name="min">An <see cref="long"/> value specifying the smallest number that can be generated.</param>
+        /// <param name="max">An <see cref="long"/> value specifying the largest number that can be generated.</param>
+        /// <returns>An <see cref="long"/> value containing the randomly generated number.</returns>
+        public long Next(long min, long max)
         {
-            return _random.Next(min, max);
+            return _random.Next((int)min, (int)max);
         }
 
         #endregion

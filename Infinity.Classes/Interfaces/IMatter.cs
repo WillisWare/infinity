@@ -2,6 +2,9 @@
 
 namespace WillisWare.Infinity.Classes.Interfaces
 {
+    /// <summary>
+    /// Defines the form and structure of classes implementing the IMatter interface.
+    /// </summary>
     public interface IMatter
     {
         #region Methods

@@ -2,21 +2,33 @@
 
 namespace WillisWare.Infinity.Classes.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    /// <summary>
+    /// Decorates a class in this project with constraints on child types.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class AllowedChildAttribute : Attribute
     {
         #region Constructors
 
-        public AllowedChildAttribute(params Type[] allowedTypes)
+        /// <summary>
+        /// Default constructor. Initializes an instance of this class with the provided values.
+        /// </summary>
+        /// <param name="allowedType"></param>
+        /// <param name="minimum"></param>
+        /// <param name="maximum"></param>
+        public AllowedChildAttribute(Type allowedType, long minimum, long maximum)
         {
-            AllowedTypes = allowedTypes;
+            AllowedType = new AllowedChildAttributeValue(allowedType, minimum, maximum);
         }
 
         #endregion
 
         #region Properties
 
-        public Type[] AllowedTypes { get; set; }
+        /// <summary>
+        /// Gets or sets the allowed class types of children for an instance.
+        /// </summary>
+        public AllowedChildAttributeValue AllowedType { get; set; }
 
         #endregion
     }

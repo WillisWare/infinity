@@ -3,8 +3,8 @@ using WillisWare.Infinity.Classes.Fundamentals;
 
 namespace WillisWare.Infinity.Classes.Objects
 {
-    [AllowedChild(typeof(AsteroidBelt), typeof(StarSystem))]
-    [MaxChildren(256)]
+    [AllowedChild(typeof(AsteroidBelt), 0, 1)]
+    [AllowedChild(typeof(StarSystem), 1, 256)]
     public class Galaxy : Matter
     {
     }

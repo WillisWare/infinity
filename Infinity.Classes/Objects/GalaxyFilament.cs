@@ -3,8 +3,7 @@ using WillisWare.Infinity.Classes.Fundamentals;
 
 namespace WillisWare.Infinity.Classes.Objects
 {
-    [AllowedChild(typeof(Galaxy))]
-    [MaxChildren(5)]
+    [AllowedChild(typeof(Galaxy), 1, 5)]
     public class GalaxyFilament : Matter
     {
     }

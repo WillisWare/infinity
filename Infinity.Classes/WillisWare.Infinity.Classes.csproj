@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -52,6 +52,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Attributes\AllowedChildAttribute.cs" />
+    <Compile Include="Attributes\AllowedChildAttributeValue.cs" />
     <Compile Include="Attributes\MaxChildrenAttribute.cs" />
     <Compile Include="Enums\Disposition.cs" />
     <Compile Include="Enums\Gender.cs" />
@@ -84,9 +85,6 @@
     <Content Include="infinity.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Infinity.Events\WillisWare.Infinity.Events.csproj">
       <Project>{783e247a-9c2b-4856-a052-489842c32dac}</Project>
       <Name>WillisWare.Infinity.Events</Name>
@@ -95,6 +93,13 @@
       <Project>{8a5deb8c-28a3-4281-8f5f-5b27cf24b0b8}</Project>
       <Name>WillisWare.Infinity.Maslow</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WillisWare.Infinity.Common\WillisWare.Infinity.Common.csproj">
+      <Project>{9c4f9cdf-a59c-4a5d-af5b-5f9b850760af}</Project>
+      <Name>WillisWare.Infinity.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

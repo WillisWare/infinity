@@ -3,8 +3,8 @@ using WillisWare.Infinity.Classes.Fundamentals;
 
 namespace WillisWare.Infinity.Classes.Objects
 {
-    [AllowedChild(typeof(Universe), typeof(SuperVoid))]
-    [MaxChildren(100)]
+    [AllowedChild(typeof(Universe), 1, 100)]
+    [AllowedChild(typeof(SuperVoid), 0, 1)]
     public class Multiverse : Matter
     {
     }

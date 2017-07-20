@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mechanics", "Mechanics", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WillisWare.Infinity.Events", "Infinity.Events\WillisWare.Infinity.Events.csproj", "{783E247A-9C2B-4856-A052-489842C32DAC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WillisWare.Infinity.Common", "WillisWare.Infinity.Common\WillisWare.Infinity.Common.csproj", "{9C4F9CDF-A59C-4A5D-AF5B-5F9B850760AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{783E247A-9C2B-4856-A052-489842C32DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{783E247A-9C2B-4856-A052-489842C32DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{783E247A-9C2B-4856-A052-489842C32DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C4F9CDF-A59C-4A5D-AF5B-5F9B850760AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C4F9CDF-A59C-4A5D-AF5B-5F9B850760AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C4F9CDF-A59C-4A5D-AF5B-5F9B850760AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C4F9CDF-A59C-4A5D-AF5B-5F9B850760AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

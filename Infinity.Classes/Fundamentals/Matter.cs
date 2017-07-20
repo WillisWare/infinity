@@ -1,30 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Newtonsoft.Json;
 using WillisWare.Infinity.Classes.Attributes;
 using WillisWare.Infinity.Classes.Generators;
 using WillisWare.Infinity.Classes.Interfaces;
+using WillisWare.Infinity.Common.DataTypes;
 
 namespace WillisWare.Infinity.Classes.Fundamentals
 {
+    /// <summary>
+    /// Base class for all matter in the Infinity solution.
+    /// </summary>
     public abstract class Matter : IMatter
     {
         #region Constructors
 
+        /// <summary>
+        /// Default constructor. Initializes an instance of this class with a random name.
+        /// </summary>
         protected Matter()
         {
             var syllables = RandomNumber.Instance.Next(1, 7);
-            Name = RandomWordGenerator.Word(syllables);
+            Name = RandomWordGenerator.Word((int)syllables);
 
             Type = GetType().Name;
         }
 
+        /// <summary>
+        /// Overloaded. Initializes an instance of this class with the specified name.
+        /// </summary>
+        /// <param name="name">A <see cref="string"/> value containing the name.</param>
         protected Matter(string name)
             : this(name, null)
         {
         }
 
+        /// <summary>
+        /// Overloaded. Initializes an instance of this class with the specified name and parent instance.
+        /// </summary>
+        /// <param name="name">A <see cref="string"/> value containing the name.</param>
+        /// <param name="parent">An <see cref="IMatter"/> implementation containing the parent instance.</param>
         protected Matter(string name, IMatter parent)
         {
             Name = name;
@@ -38,22 +55,18 @@ namespace WillisWare.Infinity.Classes.Fundamentals
 
         protected Type[] GetAllowedChildren()
         {
-            var attribute = Attribute.GetCustomAttribute(GetType(), typeof(AllowedChildAttribute)) as AllowedChildAttribute;
-            if (attribute != null)
-            {
-                return attribute.AllowedTypes;
-            }
-            return new Type[] { };
+            var attributes = GetType().GetCustomAttributes(typeof(AllowedChildAttribute)) as IEnumerable<AllowedChildAttribute>;
+
+            return attributes?.Select(c => c.AllowedType.ChildType).ToArray() ?? new Type[] { };
         }
 
-        protected int GetMaxChildren()
+        protected Range GetPopulationLimits(Type childType)
         {
-            var attribute = Attribute.GetCustomAttribute(GetType(), typeof(MaxChildrenAttribute)) as MaxChildrenAttribute;
-            if (attribute != null)
-            {
-                return attribute.Value;
-            }
-            return RandomNumber.Instance.Next(0, 10);
+            var attributes = GetType().GetCustomAttributes(typeof(AllowedChildAttribute)) as IEnumerable<AllowedChildAttribute>;
+
+            var child = attributes?.FirstOrDefault(a => a.AllowedType.ChildType == childType)?.AllowedType;
+
+            return child?.PopulationLimit ?? new Range(0, 1);
         }
 
         public void Initialize()
@@ -75,15 +88,23 @@ namespace WillisWare.Infinity.Classes.Fundamentals
                 return;
             }
 
-            var numChildren = RandomNumber.Instance.Next(0, GetMaxChildren());
-            for (var count = 0; count < numChildren; count++)
+            for (var count = 0; count < childTypes.Length; count++)
             {
-                var randomTypeIndex = RandomNumber.Instance.Next(0, childTypes.Length);
+                var boundaries = GetPopulationLimits(childTypes[count]);
 
-                var child = Activator.CreateInstance(childTypes[randomTypeIndex]) as IMatter;
-                child.Parent = this;
+                var upperBoundary = RandomNumber.Instance.Next(boundaries.Minimum, boundaries.Maximum);
+                for (var childIndex = 0; childIndex < upperBoundary; childIndex++)
+                {
+                    var child = Activator.CreateInstance(childTypes[count]) as IMatter;
+                    if (child == null)
+                    {
+                        continue;
+                    }
 
-                Children.Add(child);
+                    child.Parent = this;
+
+                    Children.Add(child);
+                }
             }
         }
 
