@@ -1,5 +1,5 @@
 # Infinity
-WillisWare, LLC's attempt at a procedural generation game. Based on a concept by Logan Willis and Mike Marino, this game is intended to prove concept sof hierarchical relationships, entity interaction, and primitive AI features.
+WillisWare, LLC's attempt at a procedural generation game. Based on a concept by Logan Willis and Mike Marino, this game is intended to prove concepts of hierarchical relationships, entity interaction, and primitive AI features.
 
 ## Procedural Generation
 Infinity spawns an endlessly variable multiverse container and lazy-loads entities one level at a time down to the individual lifeform. Randomization ensures that no two gaming sessions will ever be identical.
