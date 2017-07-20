@@ -93,7 +93,7 @@
       <Project>{8a5deb8c-28a3-4281-8f5f-5b27cf24b0b8}</Project>
       <Name>WillisWare.Infinity.Maslow</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WillisWare.Infinity.Common\WillisWare.Infinity.Common.csproj">
+    <ProjectReference Include="..\Infinity.Common\WillisWare.Infinity.Common.csproj">
       <Project>{9c4f9cdf-a59c-4a5d-af5b-5f9b850760af}</Project>
       <Name>WillisWare.Infinity.Common</Name>
     </ProjectReference>
