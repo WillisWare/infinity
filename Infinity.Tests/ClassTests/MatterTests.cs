@@ -7,7 +7,7 @@ namespace WillisWare.Infinity.Tests.ClassTests
     /// Fixture for unit testing the entity classes for the Infinity game.
     /// </summary>
     [TestFixture]
-    public sealed class MultiverseTests
+    public sealed class MatterTests
     {
         #region Test Methods
 

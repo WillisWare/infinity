@@ -18,6 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6806C49B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WillisWare.Infinity.Tests", "Infinity.Tests\WillisWare.Infinity.Tests.csproj", "{93994016-DDC3-4E80-882F-02D473302274}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mechanics", "Mechanics", "{69A16FDD-9DCE-4476-A65A-34D943CAECEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WillisWare.Infinity.Events", "Infinity.Events\WillisWare.Infinity.Events.csproj", "{783E247A-9C2B-4856-A052-489842C32DAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,11 +40,16 @@ Global
 		{93994016-DDC3-4E80-882F-02D473302274}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93994016-DDC3-4E80-882F-02D473302274}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93994016-DDC3-4E80-882F-02D473302274}.Release|Any CPU.Build.0 = Release|Any CPU
+		{783E247A-9C2B-4856-A052-489842C32DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{783E247A-9C2B-4856-A052-489842C32DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{783E247A-9C2B-4856-A052-489842C32DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{783E247A-9C2B-4856-A052-489842C32DAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{93994016-DDC3-4E80-882F-02D473302274} = {6806C49B-AF8A-4A34-9225-DCFBB33B1104}
+		{783E247A-9C2B-4856-A052-489842C32DAC} = {69A16FDD-9DCE-4476-A65A-34D943CAECEC}
 	EndGlobalSection
 EndGlobal

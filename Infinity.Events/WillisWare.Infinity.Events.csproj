@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8A5DEB8C-28A3-4281-8F5F-5B27CF24B0B8}</ProjectGuid>
+    <ProjectGuid>{783E247A-9C2B-4856-A052-489842C32DAC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WillisWare.Infinity.Maslow</RootNamespace>
-    <AssemblyName>Infinity.Maslow</AssemblyName>
+    <RootNamespace>WillisWare.Infinity.Events</RootNamespace>
+    <AssemblyName>Infinity.Events</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -51,18 +51,13 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <Compile Include="Time.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="infinity.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Infinity.Events\WillisWare.Infinity.Events.csproj">
-      <Project>{783e247a-9c2b-4856-a052-489842c32dac}</Project>
-      <Name>WillisWare.Infinity.Events</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
