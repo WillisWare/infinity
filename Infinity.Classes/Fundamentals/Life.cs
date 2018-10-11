@@ -41,14 +41,7 @@ namespace WillisWare.Infinity.Classes.Fundamentals
         public IEnumerable<ILife> Offspring { get; set; }
 
         [JsonIgnore]
-        public LifeStage Stage
-        {
-            get
-            {
-                // TODO: Calculate the life stage based on the current age, given a <= on the int value of the corresponding enum.
-                return LifeStage.Unknown;
-            }
-        }
+        public LifeStage Stage { get; set; } = LifeStage.Unknown;
 
         #endregion
     }

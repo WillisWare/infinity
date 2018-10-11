@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="ClassTests\LifeTests.cs" />
     <Compile Include="ClassTests\MatterTests.cs" />
+    <Compile Include="ClassTests\RandomWordGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

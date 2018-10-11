@@ -95,8 +95,7 @@ namespace WillisWare.Infinity.Classes.Fundamentals
                 var upperBoundary = RandomNumber.Instance.Next(boundaries.Minimum, boundaries.Maximum);
                 for (var childIndex = 0; childIndex < upperBoundary; childIndex++)
                 {
-                    var child = Activator.CreateInstance(childTypes[count]) as IMatter;
-                    if (child == null)
+                    if (!(Activator.CreateInstance(childTypes[count]) is IMatter child))
                     {
                         continue;
                     }
