@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using WillisWare.Infinity.Classes.Objects;
 
 namespace WillisWare.Infinity.Tests.ClassTests
@@ -19,10 +20,10 @@ namespace WillisWare.Infinity.Tests.ClassTests
         {
             var multiverse = new Multiverse();
 
-            Assert.IsNotNull(multiverse);
+            ClassicAssert.IsNotNull(multiverse);
             Assert.DoesNotThrow(() => multiverse.Initialize());
-            Assert.IsNotNull(multiverse.Children);
-            Assert.IsNotEmpty(multiverse.Children);
+            ClassicAssert.IsNotNull(multiverse.Children);
+            ClassicAssert.IsNotEmpty(multiverse.Children);
         }
 
         #endregion
